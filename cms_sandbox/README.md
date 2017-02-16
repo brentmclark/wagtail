@@ -1,4 +1,4 @@
-# How to create and launch virtual environment
+## How to create and launch virtual environment
 
 `virtualenv -p /usr/local/bin/python3.6 venv`
 
@@ -6,7 +6,7 @@ then
 
 `source venv/bin/activate`
 
-### `GraphQL` and `GraphiQL`
+## `GraphQL` and `GraphiQL`
 
 Graphql and Graphiql are available at /api/graphql and /api/graphiql respectively
 
