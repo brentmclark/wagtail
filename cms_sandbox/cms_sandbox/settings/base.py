@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    'api',
     'home',
     'search',
     'blog',
@@ -51,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +144,16 @@ WAGTAIL_SITE_NAME = "cms_sandbox"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+GRAPHIQL_GRAPHQL_URL = '/api/graphql'
+
+# http://docs.graphene-python.org/projects/django/en/latest/introspection.html#usage
+# Running `python3 ./src/manage.py graphql_schema` dumps your schema to <project root>/data/schema.json
+GRAPHENE = {
+    'MIDDLEWARE': [
+        'graphene_django.debug.DjangoDebugMiddleware',
+    ],
+    'SCHEMA': 'api.schema.schema', # Django app containing schema to dump, e.g. myproject.core.schema.schema
+    'SCHEMA_OUTPUT': 'schema.json',  # Output file (default: schema.json)
+    'SCHEMA_INDENT': 2, # Output file indent (default: None)
+}
