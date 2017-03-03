@@ -21,20 +21,13 @@ stuff and/or things go here
 
 ## Installing Wagtail
 Follow instructions here: http://docs.wagtail.io/en/v1.9/getting_started/
+
 kill the server
 
 ## Add Blog App
 `python manage.py startapp blog`
-Add the blog app to INSTALLED APPS
 
-``` python
-INSTALLED_APPS = (     
-  #... previously installed apps     
-  ‘blog', 
-)
-```
-
-update `models.py` to the code below:
+update `blog/models.py` with the following content:
 
 ``` python
 # Taken From http://docs.wagtail.io/en/v1.8.1/getting_started/tutorial.html
@@ -76,21 +69,18 @@ class BlogPage(Page):
 
 ## Installing Graphene
 `pip install "graphene-django==1.2"`
-
-## Configure Graphene
-Add graphene_django to installed apps in `base.py`:
-
-``` python
-INSTALLED_APPS = (
-    # ...
-    'graphene_django',
-)
+add to `requirements.txt`
+```
+  # ... previous requirements
+  graphene-django==1.2
 ```
 
+## Configure Graphene
 Add additional graphene settings to `base.py`
 
 ``` python
-GRAPHIQL_GRAPHQL_URL = '/api/graphql'
+GRAPHENE = {
+  'SCHEMA': 'api.schema.schema',
 }
 ```
 
@@ -136,10 +126,17 @@ schema = graphene.Schema(query=Query)
 ```
 
 ## Configure URLS
+Add two new imports to your `urls.py` file:
+
+``` python
+  from django.views.decorators.csrf import csrf_exempt
+  from graphene_django.views import GraphQLView
+```
+
 Add the two URLs below to your `urls.py` file just above the wagtail entry
 ``` python
-  url(r'^graphql', csrf_exempt(GraphQLView.as_view())),
-  url(r'^graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
+  url(r'^api/graphql', csrf_exempt(GraphQLView.as_view())),
+  url(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
 ```
 
 ## Add all new apps to settings
@@ -150,4 +147,33 @@ INSTALLED_APPS = (
     'blog',
     'graphene_django',
 )
+```
+
+## Commit new models
+`python manage.py makemigrations`
+`python manage.py migrate`
+
+## Start website
+`python manage.py runserver`
+
+## Make a new blog entry
+* Access the wagtail admin at [http://localhost:8000/admin/]().
+* Using the menu, navigate to `Explorer` > `Home Page` and click `Add Child Page`
+* Choose to add a new page of type `BlogPage`
+* Fill in all the fields
+* Save & Publish
+
+## test graphql
+navigate to [http://localhost:8000/api/graphiql](http://localhost:8000/api/graphiql/?query=query%20articles%20%7B%0A%20%20articles%20%7B%0A%20%20%20%20id%0A%20%20%20%20title%0A%20%20%20%20date%0A%20%20%20%20intro%0A%20%20%20%20body%0A%20%20%7D%0A%7D&operationName=articles) and run the query below:
+
+```javascript
+query articles {
+  articles {
+    id
+    title
+    date
+    intro
+    body
+  }
+}
 ```
