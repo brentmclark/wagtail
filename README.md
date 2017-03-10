@@ -1,8 +1,5 @@
-# wagtail
-Wagtail CMS for python+django
-
-## Opening Paragraph
-stuff and/or things go here
+# Getting Started with Wagtail and GraphQL
+I was recently tasked with adding a CMS to a React application using `GraphQL`.  After some research I decided to give Wagtail a try since my project was already using python+django.  I was pleased to find out that integrating GraphQL with Wagtail CMS is very simple.
 
 ## Assumptions
 * Starting from blank repository
@@ -124,7 +121,7 @@ Add the two URLs below to your `urls.py` file just above the wagtail entry
   url(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
 ```
 
-## Add all new apps to settings
+## Add new apps to settings
 ``` python
 INSTALLED_APPS = (
     # ... previously installed apps
@@ -135,8 +132,10 @@ INSTALLED_APPS = (
 ```
 
 ## Commit new models
-`python manage.py makemigrations`
-`python manage.py migrate`
+```
+python manage.py makemigrations
+python manage.py migrate
+```
 
 ## Start website
 `python manage.py runserver`
