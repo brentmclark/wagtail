@@ -8,16 +8,6 @@ stuff and/or things go here
 * Starting from blank repository
 * python 3.6
 * virtualenv
-* all that jazz
-
-## New Repository
-
-## Create Virtual Environment
-`virtualenv -p /usr/local/bin/python3.6 venv`
-
-## Activate Virtual Environment
-
-`source venv/bin/activate`
 
 ## Installing Wagtail
 Follow instructions here: http://docs.wagtail.io/en/v1.9/getting_started/
@@ -69,11 +59,6 @@ class BlogPage(Page):
 
 ## Installing Graphene
 `pip install "graphene-django==1.2"`
-add to `requirements.txt`
-```
-  # ... previous requirements
-  graphene-django==1.2
-```
 
 ## Configure Graphene
 Add additional graphene settings to `base.py`
