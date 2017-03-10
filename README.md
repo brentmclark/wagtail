@@ -13,7 +13,7 @@ I was recently tasked with adding a CMS to a React application using `GraphQL`. 
 ## Add Blog App
 Run `python manage.py startapp blog`
 
-update `blog/models.py` with the following content:
+Update `blog/models.py` with the following content:
 
 ``` python
 # Taken From http://docs.wagtail.io/en/v1.8.1/getting_started/tutorial.html
