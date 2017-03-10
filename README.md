@@ -7,12 +7,11 @@ I was recently tasked with adding a CMS to a React application using `GraphQL`. 
 * virtualenv
 
 ## Installing Wagtail
-Follow instructions here: http://docs.wagtail.io/en/v1.9/getting_started/
-
-kill the server
+* Follow instructions here: http://docs.wagtail.io/en/v1.9/getting_started/
+* Stop the server
 
 ## Add Blog App
-`python manage.py startapp blog`
+Run `python manage.py startapp blog`
 
 update `blog/models.py` with the following content:
 
@@ -55,7 +54,7 @@ class BlogPage(Page):
 ```
 
 ## Installing Graphene
-`pip install "graphene-django==1.2"`
+Run `pip install "graphene-django==1.2"`
 
 ## Configure Graphene
 Add additional graphene settings to `base.py`
@@ -108,14 +107,14 @@ schema = graphene.Schema(query=Query)
 ```
 
 ## Configure URLS
-Add two new imports to your `urls.py` file:
+Add two new imports to your `urls.py` file.
 
 ``` python
   from django.views.decorators.csrf import csrf_exempt
   from graphene_django.views import GraphQLView
 ```
 
-Add the two URLs below to your `urls.py` file just above the wagtail entry
+Add two new URLs to your `urls.py` file just above the wagtail entry.
 ``` python
   url(r'^api/graphql', csrf_exempt(GraphQLView.as_view())),
   url(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
@@ -132,13 +131,12 @@ INSTALLED_APPS = (
 ```
 
 ## Commit new models
-```
-python manage.py makemigrations
-python manage.py migrate
-```
+Run `python manage.py makemigrations`
+
+Run `python manage.py migrate`
 
 ## Start website
-`python manage.py runserver`
+Run `python manage.py runserver`
 
 ## Make a new blog entry
 * Access the wagtail admin at [http://localhost:8000/admin/]().
@@ -147,8 +145,8 @@ python manage.py migrate
 * Fill in all the fields
 * Save & Publish
 
-## test graphql
-navigate to [http://localhost:8000/api/graphiql](http://localhost:8000/api/graphiql/?query=query%20articles%20%7B%0A%20%20articles%20%7B%0A%20%20%20%20id%0A%20%20%20%20title%0A%20%20%20%20date%0A%20%20%20%20intro%0A%20%20%20%20body%0A%20%20%7D%0A%7D&operationName=articles) and run the query below:
+## Test graphql
+Navigate to [http://localhost:8000/api/graphiql](http://localhost:8000/api/graphiql/?query=query%20articles%20%7B%0A%20%20articles%20%7B%0A%20%20%20%20id%0A%20%20%20%20title%0A%20%20%20%20date%0A%20%20%20%20intro%0A%20%20%20%20body%0A%20%20%7D%0A%7D&operationName=articles) and run the query below:
 
 ```javascript
 query articles {
