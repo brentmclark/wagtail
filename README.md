@@ -1,5 +1,7 @@
 # Getting Started with Wagtail and GraphQL
-I was recently tasked with adding a CMS to a React application using `GraphQL`.  After some research I decided to give Wagtail a try since my project was already using python+django.  I was pleased to find out that integrating GraphQL with Wagtail CMS is very simple.
+I was recently tasked with adding a CMS to an existing React application using `GraphQL` and `python+django` on the back end.  Wagtail was a perfect fit for this task because it is a simple drop in as a `django` app, and was easy to expose to our `GraphQL` layer.  
+
+The ability to integrate `wagtail` with our existing domain models at the `GraphQL` layer meant that we could leverage our existing API calls _inside_ an article with little more than a `ForeignKey` and a small `resolver`.
 
 ## Assumptions
 * Starting from blank repository
